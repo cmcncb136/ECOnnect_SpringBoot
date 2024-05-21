@@ -4,19 +4,20 @@ import com.econnect.econnect.carbon_footprint_calculation.CarbonFootprintCalcula
 import com.econnect.econnect.challenge.ChallengeState;
 import com.econnect.econnect.order.OrderTotal;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED) //아무 의미 없는 생성자가 생기지 않도록 방지한다.
 public class Member {
     @Id
     @Column(length = 255)
-    private Integer id;
+    private String uid;
 
     @Column(length = 255)
     private String name;
@@ -36,4 +37,18 @@ public class Member {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<OrderTotal> totalOrderList;
+
+
+    @Builder
+    public Member(String uid, String name, String address, LocalDate joinDate, int point) {
+        this.uid = uid;
+        this.name = name;
+        this.address = address;
+        this.joinDate = joinDate;
+        this.point = point;
+        carbonFootprintCalculationResultsList = new ArrayList<>();
+        challengeStatesList = new ArrayList<>();
+        totalOrderList = new ArrayList<>();
+    }
+
 }

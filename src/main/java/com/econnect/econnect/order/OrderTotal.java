@@ -2,15 +2,16 @@ package com.econnect.econnect.order;
 
 import com.econnect.econnect.member.Member;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderTotal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +28,15 @@ public class OrderTotal {
 
     @ManyToOne
     private Member member;
+
+    @Builder
+    public OrderTotal(Integer totalOrderId, Integer totalCount, Integer totalPrice,
+                      LocalDate orderDate, Member member) {
+        this.totalOrderId = totalOrderId;
+        this.totalCount = totalCount;
+        this.totalPrice = totalPrice;
+        this.orderDate = orderDate;
+        this.detailOrderList = new ArrayList<>();
+        this.member = member;
+    }
 }

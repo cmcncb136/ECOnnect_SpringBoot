@@ -3,12 +3,12 @@ package com.econnect.econnect.challenge;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ChallengeInformation {
     @Id
     private String challengeId;
@@ -26,4 +26,15 @@ public class ChallengeInformation {
     private String imgPath;
 
     private Integer point;
+
+    @Builder
+    public ChallengeInformation(String challengeId, String title, String description,
+                                String infoContent, String imgPath, Integer point) {
+        this.challengeId = challengeId;
+        this.title = title;
+        this.description = description;
+        this.infoContent = infoContent;
+        this.imgPath = imgPath;
+        this.point = point;
+    }
 }

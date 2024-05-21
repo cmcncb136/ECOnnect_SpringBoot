@@ -4,14 +4,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Product {
     @Id
     @Column(length = 255)
@@ -39,5 +39,25 @@ public class Product {
     private Category category;
 
     @ManyToOne
-    private Condition condition;
+    private ProductCondition productCondition;
+
+    @Builder
+    public Product(String productId, String name,
+                   String description, String manufacturer,
+                   String imgPath, Integer price,
+                   Integer feedbackPoint, Integer unitsInStock,
+                   LocalDate registerDate, Category category,
+                   ProductCondition productCondition) {
+        this.productId = productId;
+        this.name = name;
+        this.description = description;
+        this.manufacturer = manufacturer;
+        this.imgPath = imgPath;
+        this.price = price;
+        this.feedbackPoint = feedbackPoint;
+        this.unitsInStock = unitsInStock;
+        this.registerDate = registerDate;
+        this.category = category;
+        this.productCondition = productCondition;
+    }
 }
