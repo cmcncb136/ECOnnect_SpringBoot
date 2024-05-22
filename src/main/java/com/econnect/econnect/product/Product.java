@@ -60,4 +60,20 @@ public class Product {
         this.category = category;
         this.productCondition = productCondition;
     }
+
+    public static Product toEntity(ProductDto dto){
+        return Product.builder()
+                .productId(dto.getProductId())
+                .name(dto.getName())
+                .description(dto.getDescription())
+                .manufacturer(dto.getManufacturer())
+                .imgPath(dto.getImgPath())
+                .price(dto.getPrice())
+                .feedbackPoint(dto.getFeedbackPoint())
+                .unitsInStock(dto.getUnitsInStock())
+                .registerDate(dto.getRegisterDate())
+                .category(dto.getCategory())
+                .productCondition(dto.getProductCondition())
+                .build();
+    }
 }

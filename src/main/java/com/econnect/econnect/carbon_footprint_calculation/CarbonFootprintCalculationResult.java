@@ -2,10 +2,7 @@ package com.econnect.econnect.carbon_footprint_calculation;
 
 import com.econnect.econnect.member.Member;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -34,6 +31,7 @@ public class CarbonFootprintCalculationResult {
     @ManyToOne
     private CarbonFootprintRank carbonFootprintRank;
 
+    @Builder
     public CarbonFootprintCalculationResult(
             Integer id, LocalDate date, Double electricityScore, Double gasScore, Double waterScore, Double total,
             Member member, CarbonFootprintRank carbonFootprintRank) {
@@ -45,5 +43,18 @@ public class CarbonFootprintCalculationResult {
         this.total = total;
         this.member = member;
         this.carbonFootprintRank = carbonFootprintRank;
+    }
+
+    public static CarbonFootprintCalculationResult toEntity(CarbonFootprintCalculationResultDto dto, Member member) {
+        return CarbonFootprintCalculationResult.builder()
+                .id(dto.getId())
+                .date(dto.getDate())
+                .electricityScore(dto.getElectricityScore())
+                .gasScore(dto.getGasScore())
+                .waterScore(dto.getWaterScore())
+                .total(dto.getTotal())
+                .carbonFootprintRank(dto.getCarbonFootprintRank())
+                .member(member)
+                .build();
     }
 }

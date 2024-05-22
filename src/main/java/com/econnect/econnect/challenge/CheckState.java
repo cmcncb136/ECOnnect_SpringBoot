@@ -21,4 +21,11 @@ public class CheckState {
         this.completeState = completeState;
         this.result = result;
     }
+
+    public static CheckState toEntity(CheckStateDto dto){
+        return CheckState.builder()
+                .completeState(dto.getCompleteState())
+                .result(dto.getResult())
+                .build();
+    }
 }

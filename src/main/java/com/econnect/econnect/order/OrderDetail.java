@@ -25,4 +25,13 @@ public class OrderDetail {
         this.totalPrice = totalPrice;
         this.orderTotal = orderTotal;
     }
+
+    public static OrderDetail toEntity(OrderDetailDto dto, OrderTotal orderTotal) {
+        return OrderDetail.builder()
+                .historyId(dto.getHistoryId())
+                .count(dto.getCount())
+                .totalPrice(dto.getTotalPrice())
+                .orderTotal(orderTotal)
+                .build();
+    }
 }

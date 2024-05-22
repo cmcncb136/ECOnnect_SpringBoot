@@ -37,4 +37,15 @@ public class ChallengeInformation {
         this.imgPath = imgPath;
         this.point = point;
     }
+
+    public static ChallengeInformation toEntity(ChallengeInformationDto dto) {
+        return ChallengeInformation.builder()
+                .challengeId(dto.getChallengeId())
+                .title(dto.getTitle())
+                .description(dto.getDescription())
+                .infoContent(dto.getInfoContent())
+                .imgPath(dto.getImgPath())
+                .point(dto.getPoint())
+                .build();
+    }
 }

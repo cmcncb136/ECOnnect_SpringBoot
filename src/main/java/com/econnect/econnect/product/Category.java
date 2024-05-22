@@ -30,4 +30,11 @@ public class Category {
         this.name = name;
         productList = new ArrayList<>();
     }
+
+    public static Category toEntity(CategoryDto dto){
+        return Category.builder()
+                .categoryId(dto.getCategoryId())
+                .name(dto.getName())
+                .build();
+    }
 }

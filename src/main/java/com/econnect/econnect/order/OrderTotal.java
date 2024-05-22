@@ -39,4 +39,14 @@ public class OrderTotal {
         this.detailOrderList = new ArrayList<>();
         this.member = member;
     }
+
+    public static OrderTotal toEntity(OrderTotalDto dto, Member member) {
+        return OrderTotal.builder()
+                .totalOrderId(dto.getTotalOrderId())
+                .totalCount(dto.getTotalCount())
+                .totalPrice(dto.getTotalPrice())
+                .orderDate(dto.getOrderDate())
+                .member(member)
+                .build();
+    }
 }

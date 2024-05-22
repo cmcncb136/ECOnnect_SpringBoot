@@ -25,6 +25,7 @@ public class CarbonFootprintRank {
     @OneToMany(mappedBy = "carbonFootprintRank", cascade = CascadeType.REMOVE)
     private List<CarbonFootprintCalculationResult> carbonFootprintCalculationResultList;
 
+
     @Builder
     public CarbonFootprintRank(Integer rankId, Integer standard, String rank, String imgPath) {
         this.rankId = rankId;
@@ -32,5 +33,15 @@ public class CarbonFootprintRank {
         this.rank = rank;
         this.imgPath = imgPath;
         this.carbonFootprintCalculationResultList = new ArrayList<>();
+    }
+
+
+    public static CarbonFootprintRank toEntity(CarbonFootprintRankDto dto) {
+        return CarbonFootprintRank.builder()
+                .rankId(dto.getRankId())
+                .standard(dto.getStandard())
+                .rank(dto.getRank())
+                .imgPath(dto.getImgPath())
+                .build();
     }
 }

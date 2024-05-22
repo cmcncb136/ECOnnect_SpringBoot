@@ -51,4 +51,15 @@ public class Member {
         totalOrderList = new ArrayList<>();
     }
 
+
+    public static Member toEntity(MemberDto dto){
+        return Member.builder()
+                .uid(dto.getUid())
+                .name(dto.getName())
+                .address(dto.getAddress())
+                .joinDate(dto.getJoinDate())
+                .point(dto.getPoint())
+                .build();
+    }
+
 }

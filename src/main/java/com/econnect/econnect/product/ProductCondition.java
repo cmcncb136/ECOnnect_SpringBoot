@@ -28,4 +28,12 @@ public class ProductCondition {
         this.productConditionName = productConditionName;
         this.productList = new ArrayList<>();
     }
+
+
+    public static ProductCondition toEntity(ProductConditionDto dto) {
+        return ProductCondition.builder()
+                .productConditionId(dto.getProductConditionId())
+                .productConditionName(dto.getProductConditionName())
+                .build();
+    }
 }

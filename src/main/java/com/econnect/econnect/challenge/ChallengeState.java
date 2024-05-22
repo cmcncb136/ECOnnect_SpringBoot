@@ -49,4 +49,18 @@ public class ChallengeState {
         this.checkState = checkState;
         this.challengeState = challengeState;
     }
+
+
+    public ChallengeState toEntity(ChallengeStateDto dto, Member member){
+        return ChallengeState.builder()
+                .challengeStateId(dto.getChallengeStateId())
+                .tryDate(dto.getTryDate())
+                .content(dto.getContent())
+                .imagePath(dto.getImagePath())
+                .checkDate(dto.getCheckDate())
+                .member(member)
+                .checkState(dto.getCheckState())
+                .challengeState(dto.getChallengeState())
+                .build();
+    }
 }
