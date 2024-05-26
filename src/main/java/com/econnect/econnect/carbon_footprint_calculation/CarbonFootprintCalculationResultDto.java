@@ -3,6 +3,7 @@ package com.econnect.econnect.carbon_footprint_calculation;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @ToString
 @Builder
@@ -16,11 +17,11 @@ public class CarbonFootprintCalculationResultDto {
     private Double gasScore;
     private Double waterScore;
     private Double total;
-
-    private CarbonFootprintRank carbonFootprintRank;
+    private CarbonFootprintRankDto carbonFootprintRank;
     private String memberId;
 
     public static CarbonFootprintCalculationResultDto toDto(CarbonFootprintCalculationResult e) {
+
         return CarbonFootprintCalculationResultDto.builder()
                 .id(e.getId())
                 .date(e.getDate())
@@ -28,8 +29,10 @@ public class CarbonFootprintCalculationResultDto {
                 .gasScore(e.getGasScore())
                 .waterScore(e.getWaterScore())
                 .total(e.getTotal())
-                .carbonFootprintRank(e.getCarbonFootprintRank())
+                .carbonFootprintRank(
+                        CarbonFootprintRankDto.toDto(e.getCarbonFootprintRank()))
                 .memberId(e.getMember().getUid())
                 .build();
+
     }
 }

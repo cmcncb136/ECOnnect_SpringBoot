@@ -33,9 +33,8 @@ public class CarbonFootprintCalculationResult {
 
     @Builder
     public CarbonFootprintCalculationResult(
-            Integer id, LocalDate date, Double electricityScore, Double gasScore, Double waterScore, Double total,
+            LocalDate date, Double electricityScore, Double gasScore, Double waterScore, Double total,
             Member member, CarbonFootprintRank carbonFootprintRank) {
-        this.id = id;
         this.date = date;
         this.electricityScore = electricityScore;
         this.gasScore = gasScore;
@@ -47,13 +46,13 @@ public class CarbonFootprintCalculationResult {
 
     public static CarbonFootprintCalculationResult toEntity(CarbonFootprintCalculationResultDto dto, Member member) {
         return CarbonFootprintCalculationResult.builder()
-                .id(dto.getId())
                 .date(dto.getDate())
                 .electricityScore(dto.getElectricityScore())
                 .gasScore(dto.getGasScore())
                 .waterScore(dto.getWaterScore())
                 .total(dto.getTotal())
-                .carbonFootprintRank(dto.getCarbonFootprintRank())
+                .carbonFootprintRank(
+                        CarbonFootprintRank.toEntity(dto.getCarbonFootprintRank()))
                 .member(member)
                 .build();
     }

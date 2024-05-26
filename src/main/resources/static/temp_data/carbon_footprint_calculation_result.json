@@ -1,0 +1,34 @@
+[
+  {
+    "id": "1",
+    "date": "2023-5-30",
+    "electricityScore": 100,
+    "gasScore": 20,
+    "waterScore": 20,
+    "total":54,
+    "memberId": "x",
+
+    "carbonFootprintRank": {
+      "rankId": 1,
+      "standard": 300,
+      "rank": "씨앗",
+      "imgPath": "img/carbon_footprint_rank/"
+    }
+  },
+  {
+    "id": "2",
+    "date": "2023-12-30",
+    "electricityScore": 230,
+    "gasScore": 230,
+    "waterScore": 10,
+    "total":104,
+    "memberId": "x",
+
+    "carbonFootprintRank": {
+      "rankId": 1,
+      "standard": 300,
+      "rank": "씨앗",
+      "imgPath": "img/carbon_footprint_rank/"
+    },
+
+]

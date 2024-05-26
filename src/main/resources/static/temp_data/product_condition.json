@@ -1,0 +1,14 @@
+[
+  {
+    "productConditionId": "P0001",
+    "productConditionName": "신제품"
+  },
+  {
+    "productConditionId": "P0002",
+    "productConditionName": "중고제품"
+  },
+  {
+    "productConditionId": "P0003",
+    "productConditionName": "이월상품"
+  }
+]

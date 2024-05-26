@@ -1,0 +1,18 @@
+[
+  {
+    "completeState": 0,
+    "result": "Default"
+  },
+  {
+    "completeState": 1,
+    "result": "Try"
+  },
+  {
+    "completeState": 2,
+    "result": "Fail"
+  },
+  {
+    "completeState": 3,
+    "result": "Success"
+  }
+]

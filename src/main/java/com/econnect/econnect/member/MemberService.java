@@ -24,4 +24,12 @@ public class MemberService {
     public List<Member> getAllMembers() {
         return memberRepository.findAll();
     }
+
+    public void save(Member member) {
+        memberRepository.save(member);
+    }
+
+    public boolean existsMember(String uid) {
+        return memberRepository.existsById(uid);
+    }
 }

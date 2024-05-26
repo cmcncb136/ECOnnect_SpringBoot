@@ -14,7 +14,7 @@ public class OrderDetailDto {
     private HistoryId historyId;
     private Integer count;
     private Integer totalPrice;
-    private Integer  orderTotalId;
+    private Integer orderTotalId;
 
     public static OrderDetailDto toDto(OrderDetail entity) {
         return OrderDetailDto.builder()

@@ -1,0 +1,116 @@
+[
+  {
+    "productId": "P00000001",
+    "name": "에코그린 물티슈",
+    "description": "html/products/P00000001.html",
+    "manufacturer": "크리넥스",
+    "imgPath": "img/products/P00000001.png",
+    "price": 6600,
+    "feedbackPoint": 500,
+    "unitsInStock": 500,
+    "registerDate": null,
+    "category":  {
+      "categoryId": "C0001",
+      "name": "생활용품"
+    },
+    "productCondition": {
+      "productConditionId": "P0001",
+      "productConditionName": "신제품"
+    }
+  },
+  {
+    "productId": "P00000002",
+    "name": "샴푸",
+    "description": "html/products/P00000002.html",
+    "manufacturer": "Green Company",
+    "imgPath": "img/products/P00000002.png",
+    "price": 17000,
+    "feedbackPoint": 1250,
+    "unitsInStock": 500,
+    "registerDate": null,
+    "category":  {
+      "categoryId": "C0001",
+      "name": "생활용품"
+    },
+    "productCondition": {
+      "productConditionId": "P0001",
+      "productConditionName": "신제품"
+    }
+  },
+  {
+    "productId": "P00000003",
+    "name": "알로에 크림",
+    "description": "html/products/P00000003.html",
+    "manufacturer": "Green Company",
+    "imgPath": "img/products/P00000003.png",
+    "price": 30000,
+    "feedbackPoint": 1000,
+    "unitsInStock": 1000,
+    "registerDate": null,
+    "category":  {
+      "categoryId": "C0003",
+      "name": "화장품"
+    },
+    "productCondition": {
+      "productConditionId": "P0001",
+      "productConditionName": "신제품"
+    }
+  },
+  {
+    "productId": "P00000004",
+    "name": "양치 세트",
+    "description": "html/products/P00000004.html",
+    "manufacturer": "Green Company",
+    "imgPath": "img/products/P00000004.png",
+    "price": 15000,
+    "feedbackPoint": 500,
+    "unitsInStock": 500,
+    "registerDate": null,
+    "category":  {
+      "categoryId": "C0001",
+      "name": "생활용품"
+    },
+    "productCondition": {
+      "productConditionId": "P0001",
+      "productConditionName": "신제품"
+    }
+  },
+  {
+    "productId": "P00000005",
+    "name": "트레비",
+    "description": "html/products/P00000005.html",
+    "manufacturer": "트레비",
+    "imgPath": "img/products/P00000005.png",
+    "price": 5000,
+    "feedbackPoint": 250,
+    "unitsInStock": 500,
+    "registerDate": null,
+    "category": {
+      "categoryId": "C0002",
+      "name": "음료수"
+    },
+    "productCondition": {
+      "productConditionId": "P0001",
+      "productConditionName": "신제품"
+    }
+  },
+  {
+    "productId": "P00000006",
+    "name": "대나무 빨대 50개입",
+    "description": "html/products/P00000006.html",
+    "manufacturer": "Green Company",
+    "imgPath": "img/products/P00000006.png",
+    "price": 12000,
+    "feedbackPoint": 1500,
+    "unitsInStock": 800,
+    "registerDate": null,
+    "category":  {
+      "categoryId": "C0001",
+      "name": "생활용품"
+    },
+    "productCondition": {
+      "productConditionId": "P0001",
+      "productConditionName": "신제품"
+    }
+  }
+]

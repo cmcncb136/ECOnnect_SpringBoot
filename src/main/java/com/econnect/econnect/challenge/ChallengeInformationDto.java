@@ -16,6 +16,7 @@ public class ChallengeInformationDto {
     private String infoContent;
     private String imgPath;
     private Integer point;
+    private Boolean everydayChallenge;
 
     public static ChallengeInformationDto toDto(ChallengeInformation entity) {
         return ChallengeInformationDto.builder()
@@ -25,6 +26,7 @@ public class ChallengeInformationDto {
                 .infoContent(entity.getInfoContent())
                 .imgPath(entity.getImgPath())
                 .point(entity.getPoint())
+                .everydayChallenge(entity.getEverydayChallenge())
                 .build();
     }
 }

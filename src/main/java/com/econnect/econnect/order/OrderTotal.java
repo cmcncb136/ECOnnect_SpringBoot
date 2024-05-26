@@ -30,9 +30,8 @@ public class OrderTotal {
     private Member member;
 
     @Builder
-    public OrderTotal(Integer totalOrderId, Integer totalCount, Integer totalPrice,
+    public OrderTotal(Integer totalCount, Integer totalPrice,
                       LocalDate orderDate, Member member) {
-        this.totalOrderId = totalOrderId;
         this.totalCount = totalCount;
         this.totalPrice = totalPrice;
         this.orderDate = orderDate;
@@ -42,7 +41,6 @@ public class OrderTotal {
 
     public static OrderTotal toEntity(OrderTotalDto dto, Member member) {
         return OrderTotal.builder()
-                .totalOrderId(dto.getTotalOrderId())
                 .totalCount(dto.getTotalCount())
                 .totalPrice(dto.getTotalPrice())
                 .orderDate(dto.getOrderDate())

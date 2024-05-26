@@ -1,10 +1,16 @@
 package com.econnect.econnect.product;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -33,6 +39,9 @@ public class Product {
     private Integer feedbackPoint;
     private Integer unitsInStock;
 
+    //@JsonSerialize(using = LocalDateSerializer.class)
+    //@JsonDeserialize(using = LocalDateDeserializer.class)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate registerDate;
 
     @ManyToOne
@@ -72,8 +81,9 @@ public class Product {
                 .feedbackPoint(dto.getFeedbackPoint())
                 .unitsInStock(dto.getUnitsInStock())
                 .registerDate(dto.getRegisterDate())
-                .category(dto.getCategory())
-                .productCondition(dto.getProductCondition())
+                .category(Category.toEntity(dto.getCategory()))
+                .productCondition(
+                        ProductCondition.toEntity(dto.getProductCondition()))
                 .build();
     }
 }

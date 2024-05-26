@@ -25,6 +25,9 @@ public class Member {
     @Column(length = 255)
     private String address;
 
+    @Column(length = 255)
+    private String phone;
+
     private LocalDate joinDate;
 
     private int point;
@@ -40,11 +43,13 @@ public class Member {
 
 
     @Builder
-    public Member(String uid, String name, String address, LocalDate joinDate, int point) {
+    public Member(String uid, String name, String address,
+                  String phone, int point) {
         this.uid = uid;
         this.name = name;
         this.address = address;
-        this.joinDate = joinDate;
+        this.joinDate = LocalDate.now();
+        this.phone = phone;
         this.point = point;
         carbonFootprintCalculationResultsList = new ArrayList<>();
         challengeStatesList = new ArrayList<>();
@@ -53,12 +58,14 @@ public class Member {
 
 
     public static Member toEntity(MemberDto dto){
+        if(dto == null) return null;
+
         return Member.builder()
                 .uid(dto.getUid())
                 .name(dto.getName())
                 .address(dto.getAddress())
-                .joinDate(dto.getJoinDate())
-                .point(dto.getPoint())
+                .phone(dto.getPhone())
+                .point(0)
                 .build();
     }
 

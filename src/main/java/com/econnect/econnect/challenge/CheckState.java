@@ -22,6 +22,8 @@ public class CheckState {
         this.result = result;
     }
 
+
+
     public static CheckState toEntity(CheckStateDto dto){
         return CheckState.builder()
                 .completeState(dto.getCompleteState())

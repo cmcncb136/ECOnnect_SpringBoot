@@ -20,8 +20,8 @@ public class ProductDto {
     private Integer feedbackPoint;
     private Integer unitsInStock;
     private LocalDate registerDate;
-    private Category category;
-    private ProductCondition productCondition;
+    private CategoryDto category;
+    private ProductConditionDto productCondition;
 
     public static ProductDto toDto(Product entity){
         return ProductDto.builder()
@@ -34,8 +34,10 @@ public class ProductDto {
                 .feedbackPoint(entity.getFeedbackPoint())
                 .unitsInStock(entity.getUnitsInStock())
                 .registerDate(entity.getRegisterDate())
-                .category(entity.getCategory())
-                .productCondition(entity.getProductCondition())
+                .category(
+                        CategoryDto.toDto(entity.getCategory()))
+                .productCondition(
+                        ProductConditionDto.toDto(entity.getProductCondition()))
                 .build();
     }
 }

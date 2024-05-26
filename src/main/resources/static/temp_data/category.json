@@ -1,0 +1,30 @@
+[
+  {
+    "categoryId": "C0001",
+    "name": "생활용품"
+  },
+  {
+    "categoryId": "C0002",
+    "name": "음료수"
+  },
+  {
+    "categoryId": "C0003",
+    "name": "화장품"
+  },
+  {
+    "categoryId": "C0004",
+    "name": "가전제품"
+  },
+  {
+    "categoryId": "C0005",
+    "name": "공구"
+  },
+  {
+    "categoryId": "C0006",
+    "name": "운동용품"
+  },
+  {
+    "categoryId": "C0007",
+    "name": "의류"
+  }
+]

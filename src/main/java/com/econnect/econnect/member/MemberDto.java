@@ -13,6 +13,7 @@ import java.time.LocalDate;
 public class MemberDto {
     private String uid;
     private String name;
+    private String phone;
     private String address;
     private LocalDate joinDate;
     private int point;
@@ -24,6 +25,7 @@ public class MemberDto {
                 .address(entity.getAddress())
                 .joinDate(entity.getJoinDate())
                 .point(entity.getPoint())
+                .phone(entity.getPhone())
                 .build();
     }
 }
