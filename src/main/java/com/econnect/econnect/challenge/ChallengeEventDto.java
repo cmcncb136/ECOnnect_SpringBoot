@@ -12,12 +12,12 @@ import java.time.LocalDate;
 public class ChallengeEventDto {
     private Integer id;
     private ChallengeInformationDto challengeInformation;
-    private LocalDate date;
+    private String date;
 
     public static ChallengeEventDto toDto(ChallengeEvent entity) {
         return ChallengeEventDto.builder()
                 .id(entity.getId())
-                .date(entity.getDate())
+                .date(entity.getDate().toString())
                 .challengeInformation(ChallengeInformationDto.toDto(entity.getChallengeInformation()))
                 .build();
     }

@@ -1,8 +1,20 @@
 [
   {
     "rankId": 1,
-    "standard": 300,
+    "standard": 100,
     "rank": "씨앗",
+    "imgPath": "img/carbon_footprint_rank/"
+  },
+  {
+    "rankId": 2,
+    "standard": 70,
+    "rank": "새싹",
+    "imgPath": "img/carbon_footprint_rank/"
+  },
+  {
+    "rankId": 3,
+    "standard": 50,
+    "rank": "나무",
     "imgPath": "img/carbon_footprint_rank/"
   }
 ]

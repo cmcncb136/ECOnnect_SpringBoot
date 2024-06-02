@@ -80,7 +80,7 @@ public class Product {
                 .price(dto.getPrice())
                 .feedbackPoint(dto.getFeedbackPoint())
                 .unitsInStock(dto.getUnitsInStock())
-                .registerDate(dto.getRegisterDate())
+                .registerDate(LocalDate.parse(dto.getRegisterDate() != null ? dto.getRegisterDate() : LocalDate.now().toString()))
                 .category(Category.toEntity(dto.getCategory()))
                 .productCondition(
                         ProductCondition.toEntity(dto.getProductCondition()))

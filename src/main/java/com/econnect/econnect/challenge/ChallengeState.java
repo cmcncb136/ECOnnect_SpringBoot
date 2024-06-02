@@ -54,15 +54,31 @@ public class ChallengeState {
 
     public static ChallengeState toEntity(ChallengeStateDto dto, Member member, ChallengeInformation challengeInformation){
         return ChallengeState.builder()
-                .tryDate(dto.getTryDate())
+                .tryDate(LocalDate.parse(dto.getTryDate()))
                 .content(dto.getContent())
                 .imagePath(dto.getImagePath())
-                .checkDate(dto.getCheckDate())
-                .tryTime(dto.getTryTime())
+                .checkDate(LocalDate.parse(dto.getCheckDate()))
+                .tryTime(LocalTime.parse(dto.getTryTime()))
                 .member(member)
                 .checkState(
                         CheckState.toEntity(dto.getCheckState()))
                 .challengeInformation(challengeInformation)
+                .build();
+    }
+
+    public static ChallengeState toEntity(ChallengeStateFullDto dto, Member member){
+        return ChallengeState.builder()
+                .tryDate(LocalDate.parse(dto.getTryDate()))
+                .content(dto.getContent())
+                .imagePath(dto.getImagePath())
+                .checkDate(LocalDate.parse(dto.getCheckDate()))
+                .tryTime(LocalTime.parse(dto.getTryTime()))
+                .member(member)
+                .checkState(
+                        CheckState.toEntity(dto.getCheckState()))
+                .challengeInformation(
+                        ChallengeInformation.toEntity(dto.getChallengeInformation())
+                )
                 .build();
     }
 }

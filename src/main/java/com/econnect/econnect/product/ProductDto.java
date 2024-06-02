@@ -15,11 +15,13 @@ public class ProductDto {
     private String name;
     private String description;
     private String manufacturer;
+
     private String imgPath;
     private Integer price;
     private Integer feedbackPoint;
     private Integer unitsInStock;
-    private LocalDate registerDate;
+
+    private String registerDate;
     private CategoryDto category;
     private ProductConditionDto productCondition;
 
@@ -33,7 +35,7 @@ public class ProductDto {
                 .price(entity.getPrice())
                 .feedbackPoint(entity.getFeedbackPoint())
                 .unitsInStock(entity.getUnitsInStock())
-                .registerDate(entity.getRegisterDate())
+                .registerDate(entity.getRegisterDate().toString())
                 .category(
                         CategoryDto.toDto(entity.getCategory()))
                 .productCondition(

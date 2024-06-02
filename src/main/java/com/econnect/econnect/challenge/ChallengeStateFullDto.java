@@ -3,14 +3,13 @@ package com.econnect.econnect.challenge;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 @ToString
 @Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChallengeStateDto {
+public class ChallengeStateFullDto {
     private Integer challengeStateId;
     private String tryDate;
     private String tryTime;
@@ -20,20 +19,21 @@ public class ChallengeStateDto {
 
     private String memberId;
     private CheckStateDto checkState;
-    private String challengeInformationId;
+    private ChallengeInformationDto challengeInformation;
 
-    public ChallengeStateDto toDto(ChallengeState entity){
-        return ChallengeStateDto.builder()
+    public static ChallengeStateFullDto toFullDto(ChallengeState entity){
+        return ChallengeStateFullDto.builder()
                 .challengeStateId(entity.getChallengeStateId())
                 .tryDate(entity.getTryDate().toString())
                 .tryTime(entity.getTryTime().toString())
                 .content(entity.getContent())
                 .imagePath(entity.getImagePath())
-                .checkDate(entity.getCheckDate().toString())
+                .checkDate(entity.getCheckDate() != null ? entity.getCheckDate().toString() : LocalDate.now().toString())
                 .memberId(entity.getMember().getUid())
                 .checkState(CheckStateDto.toDto(entity.getCheckState()))
-                .challengeInformationId(
-                        entity.getChallengeInformation().getChallengeId())
+                .challengeInformation(
+                        ChallengeInformationDto.toDto(
+                        entity.getChallengeInformation()))
                 .build();
     }
 

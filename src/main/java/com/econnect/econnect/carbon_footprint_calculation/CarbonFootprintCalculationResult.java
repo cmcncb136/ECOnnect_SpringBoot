@@ -46,7 +46,7 @@ public class CarbonFootprintCalculationResult {
 
     public static CarbonFootprintCalculationResult toEntity(CarbonFootprintCalculationResultDto dto, Member member) {
         return CarbonFootprintCalculationResult.builder()
-                .date(dto.getDate())
+                .date(LocalDate.parse(dto.getDate()))
                 .electricityScore(dto.getElectricityScore())
                 .gasScore(dto.getGasScore())
                 .waterScore(dto.getWaterScore())

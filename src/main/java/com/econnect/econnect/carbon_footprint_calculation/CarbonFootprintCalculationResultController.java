@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,7 +22,7 @@ public class CarbonFootprintCalculationResultController {
 
     //이번달 했는지 체크
     @PostMapping("/check/")
-    public CarbonFootprintCalculationResult monthCarbonFootprintCalculationResult(@RequestParam("uid") String uid) {
+    public CarbonFootprintCalculationResultDto monthCarbonFootprintCalculationResult(@RequestParam("uid") String uid) {
         List<CarbonFootprintCalculationResult> list;
         try {
             list = carbonFootprintCalculationResultService.getListByMemberAndMonth(
@@ -31,7 +32,8 @@ public class CarbonFootprintCalculationResultController {
             throw new RuntimeException(e);
         }
 
-        return  list != null && list.size() > 0 ? list.get(0) : null;
+        return  list != null && !list.isEmpty() ?
+                CarbonFootprintCalculationResultDto.toDto(list.get(0)) : null;
     }
 
     //추가하는 경우
@@ -50,9 +52,19 @@ public class CarbonFootprintCalculationResultController {
 
     //전체조회
     @PostMapping("/findByUid/")
-    public List<CarbonFootprintCalculationResult> finByUidCarbonFootprintCalculationResult(@RequestParam("uid") String uid) {
-        if(memberService.getMember(uid) == null) return null;
+    public List<CarbonFootprintCalculationResultDto> finByUidCarbonFootprintCalculationResult(@RequestParam("uid") String uid) {
+        Member member = memberService.getMember(uid); //조회한 사용자가 있는지 확인
+        if(member == null) return null;
 
-        return carbonFootprintCalculationResultService.getListByMember(memberService.getMember(uid));
+        List<CarbonFootprintCalculationResult> list = carbonFootprintCalculationResultService.getListByMember(member);
+        if(list == null) return null;
+
+        List<CarbonFootprintCalculationResultDto> dtos = new ArrayList<>();
+
+        for(CarbonFootprintCalculationResult rst : list){
+            dtos.add(CarbonFootprintCalculationResultDto.toDto(rst));
+        }
+
+        return dtos;
     }
 }

@@ -11,6 +11,7 @@ import javax.swing.text.html.parser.Entity;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,17 +25,24 @@ public class ChallengeStateController {
     private final CheckStateRepository checkStateRepository;
 
     @PostMapping("/today/")
-    public List<ChallengeState> getTodayChallengeInformation(@RequestParam("uid") String uid) {
-        if(memberService.existsMember(uid)) return null;
+    public List<ChallengeStateFullDto> getTodayChallengeInformation(@RequestParam("uid") String uid) {
         Member member = memberService.getMember(uid);
+        if(member == null) return null;
         //만약 오늘 챌린지가 추가되지 않았다면
-        if(challengeStateService.existTodayChallengeState(member)){
-            //추가해 준다.
-            challengeStateService.addTodayChallengeState(member);
-        }
+        if(!challengeStateService.existTodayChallengeState(member))
+            challengeStateService.addTodayChallengeState(member);//추가해 준다.
 
-        return challengeStateService.getByMemberAndTryDate(member, LocalDate.now());
+
+        List<ChallengeState> stateList = challengeStateService.getByMemberAndTryDate(member, LocalDate.now());
+        if(stateList == null) return null;
+
+        List<ChallengeStateFullDto> stateFullDtos = new ArrayList<>();
+        for(ChallengeState state : stateList)
+            stateFullDtos.add(ChallengeStateFullDto.toFullDto(state));
+
+        return stateFullDtos;
     }
+
 
     @PostMapping("/update/")
     public boolean updateChallengeState(@RequestParam("uid") String uid,

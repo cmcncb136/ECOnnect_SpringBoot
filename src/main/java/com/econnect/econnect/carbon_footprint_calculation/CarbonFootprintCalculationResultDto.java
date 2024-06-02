@@ -12,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class CarbonFootprintCalculationResultDto {
     private Integer id;
-    private LocalDate date;
+    private String date;
     private Double electricityScore;
     private Double gasScore;
     private Double waterScore;
@@ -24,7 +24,7 @@ public class CarbonFootprintCalculationResultDto {
 
         return CarbonFootprintCalculationResultDto.builder()
                 .id(e.getId())
-                .date(e.getDate())
+                .date(e.getDate().toString())
                 .electricityScore(e.getElectricityScore())
                 .gasScore(e.getGasScore())
                 .waterScore(e.getWaterScore())

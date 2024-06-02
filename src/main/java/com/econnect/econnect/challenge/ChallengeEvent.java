@@ -28,7 +28,7 @@ public class ChallengeEvent {
 
     public static ChallengeEvent toEntity(ChallengeEventDto dto) {
         return ChallengeEvent.builder()
-                .date(dto.getDate())
+                .date(LocalDate.parse(dto.getDate()))
                 .challengeInformation(ChallengeInformation.toEntity(
                         dto.getChallengeInformation()
                 ))

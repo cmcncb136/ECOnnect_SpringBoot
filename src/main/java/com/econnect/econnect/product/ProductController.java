@@ -30,21 +30,9 @@ public class ProductController {
         return ProductDto.toDto(productService.findById(id));
     }
 
-    @GetMapping("/testAdd/")
-    public void testAdd() {
-        Product p = Product.builder()
-                .productId("P1234" + productService.findAll().size())
-                .name("갤럭시")
-                .price(12000)
-                .imgPath("/img/path")
-                .description("Hello")
-                .feedbackPoint(1000)
-                .manufacturer("Samsung")
-                .registerDate(LocalDate.now())
-                .unitsInStock(10)
-                .build();
+    @GetMapping("/findCategory/")
+    public List<ProductDto> findCategory(@RequestParam("categoryId") String categoryId) {
 
-        productService.save(p);
+        return null;
     }
-
 }

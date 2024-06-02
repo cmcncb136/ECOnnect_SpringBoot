@@ -1,5 +1,6 @@
 package com.econnect.econnect.basic;
 
+import com.econnect.econnect.challenge.*;
 import com.econnect.econnect.product.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -23,6 +24,8 @@ public class InitService implements CommandLineRunner {
     private final CategoryRepository categoryRepository;
     private final ProductConditionRepository productConditionRepository;
     private final ProductRepository productRepository;
+    private final CheckStateRepository checkStateRepository;
+    private final ChallengeInformationRepository challengeInformationRepository;
 
     private void initProduct(ObjectMapper objectMapper) throws JsonProcessingException {
         ArrayList<CategoryDto> categories
@@ -63,11 +66,40 @@ public class InitService implements CommandLineRunner {
                 productRepository.save(p);
             }
     }
+
+    private void initChallenge(ObjectMapper objectMapper) throws JsonProcessingException {
+        ArrayList<CheckStateDto> checkStates
+                = objectMapper.readValue(
+                resourceJsonToString("temp_data/check_state.json"),
+                new TypeReference<ArrayList<CheckStateDto>>(){}
+        );
+
+        ArrayList<ChallengeInformationDto> challengeInformationDtos
+                = objectMapper.readValue(
+                resourceJsonToString("temp_data/challenge_information.json"),
+                new TypeReference<ArrayList<ChallengeInformationDto>>(){}
+        );
+
+        for(CheckStateDto checkState : checkStates){
+            if(!checkStateRepository.existsById(checkState.getCompleteState())){
+                CheckState c = CheckState.toEntity(checkState);
+                checkStateRepository.save(c);
+            }
+        }
+
+        for(ChallengeInformationDto challengeInformationDto : challengeInformationDtos){
+            if(!challengeInformationRepository.existsById(challengeInformationDto.getChallengeId())){
+                ChallengeInformation ci = ChallengeInformation.toEntity(challengeInformationDto);
+                challengeInformationRepository.save(ci);
+            }
+        }
+    }
+
     @SneakyThrows//상위로 예외던짐
     private void initDB() {
         ObjectMapper objectMapper = new ObjectMapper();
-
         initProduct(objectMapper);
+        initChallenge(objectMapper);
     }
 
     @SneakyThrows//상위로 예외던짐
