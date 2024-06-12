@@ -1,14 +1,13 @@
 package com.econnect.econnect.challenge;
 
-import com.econnect.econnect.basic.FileService;
+import com.econnect.econnect.basic.FTPService;
 import com.econnect.econnect.member.Member;
 import com.econnect.econnect.member.MemberService;
+import com.econnect.econnect.result.CommonResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.swing.text.html.parser.Entity;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -21,8 +20,9 @@ public class ChallengeStateController {
     private final ChallengeStateService challengeStateService;
     private final ChallengeInformationService challengeInformationService;
     private final MemberService memberService;
-    private final FileService fileService;
+   private final FTPService ftpService;
     private final CheckStateRepository checkStateRepository;
+    private final ChallengeStateRepository challengeStateRepository;
 
     @PostMapping("/today/")
     public List<ChallengeStateFullDto> getTodayChallengeInformation(@RequestParam("uid") String uid) {
@@ -43,39 +43,51 @@ public class ChallengeStateController {
         return stateFullDtos;
     }
 
+    @PostMapping("/memberCheck/")
+    public CommonResult memberCheck(@RequestParam("challengeStateId") Integer challengeSateId) {
+        return challengeStateService.memberCheck(challengeSateId);
+    }
 
-    @PostMapping("/update/")
+    @PostMapping("/checking/") //점검중이거나 아직 유저가 확인 안 한것
+    public List<ChallengeStateFullDto> checking(@RequestParam("uid") String uid) {
+        return challengeStateService.findByMemberAndNotMemberCheck(uid);
+    }
+
+
+
+    @PostMapping("/try/")
     public boolean updateChallengeState(@RequestParam("uid") String uid,
-                                        @RequestBody ChallengeStateDto challengeStateDto,
+                                        @RequestParam("challengeStateId") Integer challengeStateId,
                                         @RequestPart("image") MultipartFile image) {
-        if(!memberService.existsMember(uid)
-        || challengeStateDto == null
-        || image == null)  return false;
+        if(!memberService.existsMember(uid) || image == null)  return false;
+//        try {
+//            image.transferTo(new File("C:\\Users\\KJW\\Documents\\PicPick\\buffer\\" + image.getOriginalFilename()));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
 
-        //경로를 구한다. TODO. 이미지 저장 잘 되는지 확인 필요
-        String path = "subscribe_state/" + uid;
-        String name = "/" + challengeStateDto.getChallengeStateId()
+        ChallengeState state = challengeStateRepository.findById(challengeStateId).orElse(null);
+        if(state == null) return false;
+
+
+        //경로르 구한다.
+        String name = challengeStateId + "."
                 + image.getOriginalFilename().substring(
                         image.getOriginalFilename().lastIndexOf(".") + 1);
-        try {
-            //파일 저장
-            fileService.uploadFile(path, name, image);
-        } catch (IOException e) {
+
+        System.out.println("Path : " + name);
+
+
+        //파일 저장
+        if(!ftpService.uploadFileToFTP(image, uid, name))
             return false;
-        }
 
-        //Dto Entity로 변환
-        ChallengeState state = ChallengeState.toEntity(
-                challengeStateDto,
-                memberService.getMember(uid),
-                challengeInformationService.getChallengeInformationById(
-                        challengeStateDto.getChallengeInformationId())
-        );
 
-        state.setImagePath(path + name); //이미지 경로 저장
+        state.setImagePath("img/challenge_state/" + uid + "/" + name); //이미지 경로 저장
         state.setCheckState( //상태 정보 변경
-                checkStateRepository.findById(State.TRY.getValue()).orElse(null)
+                checkStateRepository.findById(CheckState.TRY).orElse(null)
         );
+
         state.setTryTime(LocalTime.now()); //시간 정보 최신화
 
         challengeStateService.updateChallengeState(state); //갱신

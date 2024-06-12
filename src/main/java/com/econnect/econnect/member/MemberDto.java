@@ -19,6 +19,8 @@ public class MemberDto {
     private int point;
 
     public static MemberDto toDto(Member entity){
+        if(entity == null) return null;
+
         return MemberDto.builder()
                 .uid(entity.getUid())
                 .name(entity.getName())

@@ -1,0 +1,42 @@
+[
+  {
+    "productId": "P00000001",
+    "date": "2024-06-07"
+  },
+  {
+    "productId": "P00000003",
+    "date": "2024-06-07"
+  },
+  {
+    "productId": "P00000005",
+    "date": "2024-06-07"
+  },
+  {
+    "productId": "P00000006",
+    "date": "2024-06-07"
+  },
+  {
+    "productId": "P00000001",
+    "date": null
+  },
+  {
+    "productId": "P00000003",
+    "date": null
+  },
+  {
+    "productId": "P00000005",
+    "date": null
+  },
+  {
+    "productId": "P00000006",
+    "date": null
+  },
+  {
+    "productId": "P00000009",
+    "date": null
+  },
+  {
+    "productId": "P00000011",
+    "date": null
+  }
+]

@@ -1,6 +1,7 @@
 package com.econnect.econnect.member;
 
 import com.econnect.econnect.carbon_footprint_calculation.CarbonFootprintCalculationResult;
+import com.econnect.econnect.cart.Cart;
 import com.econnect.econnect.challenge.ChallengeState;
 import com.econnect.econnect.order.OrderTotal;
 import jakarta.persistence.*;
@@ -41,6 +42,9 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<OrderTotal> totalOrderList;
 
+    @OneToMany(mappedBy = "member", cascade =  CascadeType.REMOVE)
+    private List<Cart> cartList;
+
 
     @Builder
     public Member(String uid, String name, String address,
@@ -54,6 +58,7 @@ public class Member {
         carbonFootprintCalculationResultsList = new ArrayList<>();
         challengeStatesList = new ArrayList<>();
         totalOrderList = new ArrayList<>();
+        cartList = new ArrayList<>();
     }
 
 

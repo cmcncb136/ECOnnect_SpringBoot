@@ -16,10 +16,12 @@ public class ProductController {
 
     @GetMapping("/all/")
     public List<ProductDto> getAll() {
-        ArrayList<Product> soruce = (ArrayList) productService.findAll();
+        List<Product> source = productService.findAll();
+        if(source == null) return null;
+
         ArrayList<ProductDto> products = new ArrayList<>();
 
-        for(Product p : soruce)
+        for(Product p : source)
             products.add(ProductDto.toDto(p));
 
         return products;
@@ -34,5 +36,10 @@ public class ProductController {
     public List<ProductDto> findCategory(@RequestParam("categoryId") String categoryId) {
 
         return null;
+    }
+
+    @GetMapping("/recommend/")
+    public List<ProductDto> recommend() {
+        return productService.findProductRecommend();
     }
 }

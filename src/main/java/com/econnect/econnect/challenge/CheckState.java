@@ -10,6 +10,8 @@ import lombok.*;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CheckState {
+    public static final int DEFAULT = 0, TRY = 1, FAIL = 2, SUCCEEDED = 3;
+
     @Id
     private Integer completeState;
 

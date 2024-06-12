@@ -1,18 +1,13 @@
 package com.econnect.econnect.product;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import com.econnect.econnect.cart.Cart;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -50,6 +45,12 @@ public class Product {
     @ManyToOne
     private ProductCondition productCondition;
 
+    @OneToMany(mappedBy = "product", cascade =  CascadeType.REMOVE)
+    private List<Cart> cartList;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    private List<ProductRecommend> productRecommendList;
+
     @Builder
     public Product(String productId, String name,
                    String description, String manufacturer,
@@ -68,6 +69,8 @@ public class Product {
         this.registerDate = registerDate;
         this.category = category;
         this.productCondition = productCondition;
+        this.cartList = new ArrayList<>();
+        this.productRecommendList = new ArrayList<>();
     }
 
     public static Product toEntity(ProductDto dto){

@@ -17,6 +17,7 @@ public class ChallengeStateDto {
     private String content;
     private String imagePath;
     private String checkDate;
+    private Boolean memberCheck;
 
     private String memberId;
     private CheckStateDto checkState;
@@ -29,6 +30,7 @@ public class ChallengeStateDto {
                 .tryTime(entity.getTryTime().toString())
                 .content(entity.getContent())
                 .imagePath(entity.getImagePath())
+                .memberCheck(entity.getMemberCheck())
                 .checkDate(entity.getCheckDate().toString())
                 .memberId(entity.getMember().getUid())
                 .checkState(CheckStateDto.toDto(entity.getCheckState()))

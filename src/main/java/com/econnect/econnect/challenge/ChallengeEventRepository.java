@@ -10,4 +10,5 @@ import java.util.List;
 public interface ChallengeEventRepository  extends JpaRepository<ChallengeEvent, Integer> {
     //날짜 조회
     List<ChallengeEvent> findByDate(LocalDate date);
+    boolean existsByChallengeInformationAndDate(ChallengeInformation challengeInformation, LocalDate date);
 }

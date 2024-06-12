@@ -5,14 +5,14 @@
   },
   {
     "completeState": 1,
-    "result": "Try"
+    "result": "확인 중"
   },
   {
     "completeState": 2,
-    "result": "Fail"
+    "result": "실패"
   },
   {
     "completeState": 3,
-    "result": "Success"
+    "result": "성공"
   }
 ]

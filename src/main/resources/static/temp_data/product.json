@@ -112,5 +112,119 @@
       "productConditionId": "P0001",
       "productConditionName": "신제품"
     }
+  },
+  {
+    "productId": "P00000007",
+    "name": "친환경 나무 타월 1P",
+    "description": "html/products/P00000007.html",
+    "manufacturer": "송월타월",
+    "imgPath": "img/products/P00000007.png",
+    "price": 5200,
+    "feedbackPoint": 400,
+    "unitsInStock": 1000,
+    "registerDate": null,
+    "category":  {
+      "categoryId": "C0001",
+      "name": "생활용품"
+    },
+    "productCondition": {
+      "productConditionId": "P0001",
+      "productConditionName": "신제품"
+    }
+  },
+  {
+    "productId": "P00000008",
+    "name": "무첨가 손 세정제 500ml",
+    "description": "html/products/P00000008.html",
+    "manufacturer": "유한회사",
+    "imgPath": "img/products/P00000008.png",
+    "price": 10000,
+    "feedbackPoint": 1200,
+    "unitsInStock": 1500,
+    "registerDate": null,
+    "category":  {
+      "categoryId": "C0001",
+      "name": "생활용품"
+    },
+    "productCondition": {
+      "productConditionId": "P0001",
+      "productConditionName": "신제품"
+    }
+  },
+  {
+    "productId": "P00000009",
+    "name": "친환경 종이호일",
+    "description": "html/products/P00000009.html",
+    "manufacturer": "자연으로",
+    "imgPath": "img/products/P00000009.png",
+    "price": 4500,
+    "feedbackPoint": 800,
+    "unitsInStock": 3000,
+    "registerDate": null,
+    "category":  {
+      "categoryId": "C0001",
+      "name": "생활용품"
+    },
+    "productCondition": {
+      "productConditionId": "P0001",
+      "productConditionName": "신제품"
+    }
+  },
+  {
+    "productId": "P00000010",
+    "name": "슈가랩 위생장갑 1매",
+    "description": "html/products/P00000010.html",
+    "manufacturer": "에코매스",
+    "imgPath": "img/products/P00000010.png",
+    "price": 4000,
+    "feedbackPoint": 800,
+    "unitsInStock": 4000,
+    "registerDate": null,
+    "category":  {
+      "categoryId": "C0001",
+      "name": "생활용품"
+    },
+    "productCondition": {
+      "productConditionId": "P0001",
+      "productConditionName": "신제품"
+    }
+  },
+  {
+    "productId": "P00000011",
+    "name": "바스틀리 토일렛롤 12개입",
+    "description": "html/products/P00000011.html",
+    "manufacturer": "유한회사",
+    "imgPath": "img/products/P00000011.png",
+    "price": 17000,
+    "feedbackPoint": 1600,
+    "unitsInStock": 2000,
+    "registerDate": null,
+    "category":  {
+      "categoryId": "C0001",
+      "name": "생활용품"
+    },
+    "productCondition": {
+      "productConditionId": "P0001",
+      "productConditionName": "신제품"
+    }
+  },
+  {
+    "productId": "P00000012",
+    "name": "자연 원목 도마",
+    "description": "html/products/P00000012.html",
+    "manufacturer": "나무오브제",
+    "imgPath": "img/products/P00000012.png",
+    "price": 35000,
+    "feedbackPoint": 3000,
+    "unitsInStock": 1000,
+    "registerDate": null,
+    "category":  {
+      "categoryId": "C0001",
+      "name": "생활용품"
+    },
+    "productCondition": {
+      "productConditionId": "P0001",
+      "productConditionName": "신제품"
+    }
   }
 ]

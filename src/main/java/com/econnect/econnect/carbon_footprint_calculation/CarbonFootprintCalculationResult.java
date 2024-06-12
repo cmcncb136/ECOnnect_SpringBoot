@@ -46,13 +46,14 @@ public class CarbonFootprintCalculationResult {
 
     public static CarbonFootprintCalculationResult toEntity(CarbonFootprintCalculationResultDto dto, Member member) {
         return CarbonFootprintCalculationResult.builder()
-                .date(LocalDate.parse(dto.getDate()))
+                .date(dto.getDate() != null ? LocalDate.parse(dto.getDate()) : LocalDate.now())
                 .electricityScore(dto.getElectricityScore())
                 .gasScore(dto.getGasScore())
                 .waterScore(dto.getWaterScore())
                 .total(dto.getTotal())
                 .carbonFootprintRank(
-                        CarbonFootprintRank.toEntity(dto.getCarbonFootprintRank()))
+                        dto.getCarbonFootprintRank() != null ?
+                        CarbonFootprintRank.toEntity(dto.getCarbonFootprintRank()) : null)
                 .member(member)
                 .build();
     }

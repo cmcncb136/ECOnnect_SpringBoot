@@ -1,6 +1,7 @@
 package com.econnect.econnect.challenge;
 
 
+import com.econnect.econnect.admin.ChallengeStateFullAdminDto;
 import com.econnect.econnect.member.Member;
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,6 +30,8 @@ public class ChallengeState {
 
     private LocalDate checkDate;
 
+    private Boolean memberCheck;
+
     @ManyToOne
     private Member member;
 
@@ -40,7 +43,7 @@ public class ChallengeState {
 
     @Builder
     public ChallengeState(LocalDate tryDate, String content, String imagePath, LocalDate checkDate, Member member,
-                          CheckState checkState, ChallengeInformation challengeInformation, LocalTime tryTime) {
+                          CheckState checkState, ChallengeInformation challengeInformation, LocalTime tryTime, Boolean memberCheck) {
         this.tryDate = tryDate;
         this.content = content;
         this.imagePath = imagePath;
@@ -49,6 +52,7 @@ public class ChallengeState {
         this.checkState = checkState;
         this.challengeInformation = challengeInformation;
         this.tryTime = tryTime;
+        this.memberCheck = memberCheck;
     }
 
 
@@ -60,6 +64,7 @@ public class ChallengeState {
                 .checkDate(LocalDate.parse(dto.getCheckDate()))
                 .tryTime(LocalTime.parse(dto.getTryTime()))
                 .member(member)
+                .memberCheck(dto.getMemberCheck())
                 .checkState(
                         CheckState.toEntity(dto.getCheckState()))
                 .challengeInformation(challengeInformation)
@@ -71,9 +76,29 @@ public class ChallengeState {
                 .tryDate(LocalDate.parse(dto.getTryDate()))
                 .content(dto.getContent())
                 .imagePath(dto.getImagePath())
+                .memberCheck(dto.getMemberCheck())
                 .checkDate(LocalDate.parse(dto.getCheckDate()))
                 .tryTime(LocalTime.parse(dto.getTryTime()))
                 .member(member)
+                .checkState(
+                        CheckState.toEntity(dto.getCheckState()))
+                .challengeInformation(
+                        ChallengeInformation.toEntity(dto.getChallengeInformation())
+                )
+                .build();
+    }
+
+    public static ChallengeState toEntity(ChallengeStateFullAdminDto dto){
+        return ChallengeState.builder()
+                .tryDate(LocalDate.parse(dto.getTryDate()))
+                .content(dto.getContent())
+                .imagePath(dto.getImagePath())
+                .memberCheck(dto.getMemberCheck())
+                .checkDate(LocalDate.parse(dto.getCheckDate()))
+                .tryTime(LocalTime.parse(dto.getTryTime()))
+                .member(
+                        Member.toEntity(dto.getMember())
+                )
                 .checkState(
                         CheckState.toEntity(dto.getCheckState()))
                 .challengeInformation(

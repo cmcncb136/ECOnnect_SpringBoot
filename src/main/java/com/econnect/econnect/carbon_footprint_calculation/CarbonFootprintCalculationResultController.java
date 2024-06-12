@@ -23,10 +23,13 @@ public class CarbonFootprintCalculationResultController {
     //이번달 했는지 체크
     @PostMapping("/check/")
     public CarbonFootprintCalculationResultDto monthCarbonFootprintCalculationResult(@RequestParam("uid") String uid) {
+        Member member = memberService.getMember(uid);
+        if(member == null) return null;
+
         List<CarbonFootprintCalculationResult> list;
         try {
             list = carbonFootprintCalculationResultService.getListByMemberAndMonth(
-                    memberService.getMember(uid),
+                    member,
                     LocalDate.now());
         } catch (ParseException e) {
             throw new RuntimeException(e);
@@ -39,14 +42,13 @@ public class CarbonFootprintCalculationResultController {
     //추가하는 경우
     @PostMapping("/add/")
     public boolean addCarbonFootprintCalculationResult(@RequestBody CarbonFootprintCalculationResultDto dto) {
-        CarbonFootprintCalculationResult carbonFootprintCalculationResult = CarbonFootprintCalculationResult.toEntity(
-                dto, memberService.getMember(dto.getMemberId()));
-
         //이번 달에 이미 데이터가 있다면
-        carbonFootprintCalculationResult.setDate(LocalDate.now());
         if(monthCarbonFootprintCalculationResult(dto.getMemberId()) != null) return false;
 
-        carbonFootprintCalculationResultService.save(carbonFootprintCalculationResult);
+
+        carbonFootprintCalculationResultService.save(
+                carbonFootprintCalculationResultService.calculation(dto)
+        );
         return true;
     }
 
@@ -67,4 +69,58 @@ public class CarbonFootprintCalculationResultController {
 
         return dtos;
     }
+
+    //특정 년, 월조회
+    @PostMapping("/month/")
+    public CarbonFootprintCalculationResultDto findByMonthCarbonFootprintCalculationResult(@RequestParam("uid") String uid, @RequestParam("date") String date) {
+        Member member = memberService.getMember(uid);
+        if(member == null) return null;
+
+        List<CarbonFootprintCalculationResult> rsts;
+        try {
+            rsts = carbonFootprintCalculationResultService.getListByMemberAndMonth(
+                    member, LocalDate.parse(date)
+            );
+
+            return  rsts != null && !rsts.isEmpty() ?
+                    CarbonFootprintCalculationResultDto.toDto(rsts.get(0)) : null;
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    @PostMapping("/last_month/")
+    public CarbonFootprintCalculationResultDto lastMonthCarbonFootprintCalculationResult(@RequestParam("uid") String uid) {
+        Member member = memberService.getMember(uid);
+        if(member == null) return null;
+        System.out.println("start");
+        LocalDate date = LocalDate.now();
+
+
+        List<CarbonFootprintCalculationResult> rsts;
+        try {
+            rsts = carbonFootprintCalculationResultService.getListByMemberAndMonth(
+                    member, date.minusMonths(1)
+            );
+            System.out.println("rst size : " + rsts.size());
+
+
+            return  rsts != null && !rsts.isEmpty() ?
+                    CarbonFootprintCalculationResultDto.toDto(rsts.get(0)) : null;
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    @PostMapping("/year/")
+    public List<CarbonFootprintCalculationResultDto> yearCarbonFootprintCalculationResult(@RequestParam("uid") String uid) {
+        try {
+            return carbonFootprintCalculationResultService.entityListToDtoList(
+                    carbonFootprintCalculationResultService.getListByYear(uid, LocalDate.now())
+            );
+        } catch (ParseException e) {
+            return  null;
+        }
+    }
+
 }

@@ -24,7 +24,7 @@ public class CarbonFootprintCalculationResultDto {
 
         return CarbonFootprintCalculationResultDto.builder()
                 .id(e.getId())
-                .date(e.getDate().toString())
+                .date(e.getDate() != null ? e.getDate().toString() : LocalDate.now().toString())
                 .electricityScore(e.getElectricityScore())
                 .gasScore(e.getGasScore())
                 .waterScore(e.getWaterScore())

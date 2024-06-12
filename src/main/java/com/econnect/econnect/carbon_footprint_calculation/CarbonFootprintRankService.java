@@ -25,4 +25,15 @@ public class CarbonFootprintRankService {
     public List<CarbonFootprintRank> getAllCarbonFootprintRank() {
         return carbonFootprintRankRepository.findAll();
     }
+
+    public CarbonFootprintRank getCarbonFootprintRankByScore(double total) {
+        List<CarbonFootprintRank> carbonFootprintRankList = carbonFootprintRankRepository.findAll();
+        int i;
+
+        for( i = carbonFootprintRankList.size() - 1; i >= 1; i--)
+            if(carbonFootprintRankList.get(i).getStandard() >= total)
+                break;
+
+        return carbonFootprintRankList.get(i);
+    }
 }

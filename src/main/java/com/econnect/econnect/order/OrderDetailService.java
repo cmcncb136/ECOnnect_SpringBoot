@@ -14,8 +14,5 @@ public class OrderDetailService {
         Optional<OrderDetail> orderDetail = orderDetailRepository.findById(historyId);
         return orderDetail.isPresent() ? orderDetail.get() : null;
     }
-
-    public void save(OrderDetail orderDetail) { orderDetailRepository.save(orderDetail); }
-
-
+    
 }

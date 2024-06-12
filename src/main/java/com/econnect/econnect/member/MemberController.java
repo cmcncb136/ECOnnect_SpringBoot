@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -16,6 +18,27 @@ public class MemberController {
     @PostMapping("/find/")
     public MemberDto getMemberByUid(@RequestParam("uid") String uid) {
         return MemberDto.toDto(memberService.getMember(uid));
+    }
+
+    @PostMapping("/finds/")
+    public List<MemberDto> getMembersByUid(@RequestParam("uid") List<String> uids) {
+        List<MemberDto> members = new ArrayList<>();
+        for(String uid : uids)
+            members.add(MemberDto.toDto(memberService.getMember(uid)));
+
+        return members;
+    }
+
+    @PostMapping("/update/")
+    public Boolean updateMember(@RequestParam("uid") String uid, @RequestBody MemberDto dto) {
+        if(!memberService.existsMember(uid)) return false;
+        Member originalMember = memberService.getMember(uid);
+        originalMember.setName(dto.getName());
+        originalMember.setAddress(dto.getAddress());
+        originalMember.setPhone(dto.getPhone());
+
+        memberService.save(originalMember);
+        return true;
     }
 
     @PostMapping("/join/")

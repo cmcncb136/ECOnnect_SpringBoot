@@ -1,5 +1,11 @@
-package com.econnect.econnect.challenge;
+package com.econnect.econnect.admin;
 
+import com.econnect.econnect.challenge.ChallengeInformationDto;
+import com.econnect.econnect.challenge.ChallengeState;
+import com.econnect.econnect.challenge.ChallengeStateFullDto;
+import com.econnect.econnect.challenge.CheckStateDto;
+import com.econnect.econnect.member.Member;
+import com.econnect.econnect.member.MemberDto;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -9,7 +15,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChallengeStateFullDto {
+public class ChallengeStateFullAdminDto {
     private Integer challengeStateId;
     private String tryDate;
     private String tryTime;
@@ -18,12 +24,13 @@ public class ChallengeStateFullDto {
     private String checkDate;
     private Boolean memberCheck;
 
-    private String memberId;
+    private MemberDto member;
     private CheckStateDto checkState;
     private ChallengeInformationDto challengeInformation;
 
-    public static ChallengeStateFullDto toFullDto(ChallengeState entity){
-        return ChallengeStateFullDto.builder()
+
+    public static ChallengeStateFullAdminDto toFullAdminDto(ChallengeState entity){
+        return ChallengeStateFullAdminDto.builder()
                 .challengeStateId(entity.getChallengeStateId())
                 .tryDate(entity.getTryDate().toString())
                 .tryTime(entity.getTryTime().toString())
@@ -31,12 +38,11 @@ public class ChallengeStateFullDto {
                 .imagePath(entity.getImagePath())
                 .memberCheck(entity.getMemberCheck())
                 .checkDate(entity.getCheckDate() != null ? entity.getCheckDate().toString() : LocalDate.now().toString())
-                .memberId(entity.getMember().getUid())
+                .member(MemberDto.toDto(entity.getMember()))
                 .checkState(CheckStateDto.toDto(entity.getCheckState()))
                 .challengeInformation(
                         ChallengeInformationDto.toDto(
-                        entity.getChallengeInformation()))
+                                entity.getChallengeInformation()))
                 .build();
     }
-
 }
